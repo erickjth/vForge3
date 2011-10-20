@@ -1,0 +1,7 @@
+#to GIT
+
+git add README
+git commit -m 'first commit'
+git remote add origin git@github.com:erickjth/vForge3.git
+git push -u origin master
+
