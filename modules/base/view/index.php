@@ -1,0 +1,1 @@
+Var: <?php  echo $erick; ?>
