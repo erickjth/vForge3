@@ -27,6 +27,12 @@ input.error,textarea.error,select.error{
 .add{
     background: url('../images/icons/add.png') no-repeat 0 0;
 }
+
+input.date{
+    background: url('../images/icons/date.png') no-repeat right center !important;
+}
+
+
 a.button-without-text{
     display: inline-block;
     width: 16px;

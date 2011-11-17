@@ -18,7 +18,6 @@ class taskController extends ControllerBase{
     }
    
     function index(){     
-        GLOBAL $DB;
         $this->view("index");
     }
     
@@ -63,6 +62,7 @@ class taskController extends ControllerBase{
     
     function add() {
 
+        //Contruir clase RequestManager para implementar funciones.
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             GLOBAL $DB,$USER;
             
@@ -103,11 +103,49 @@ class taskController extends ControllerBase{
         }
     }
     
-    function update(){
+    function edit(){
 
-        $this->name = "Erick Jose";
-        
-        $this->view("update");
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            GLOBAL $DB,$USER;
+            
+            $vfTask = $_POST["task"];
+            //Implementa validate
+            //$this->_model->validate( $vfTask );
+            $vfTask["date_start"] = ( isset( $vfTask["date_start"] ) )?$this->parserDateToEpoc( $vfTask["date_start"] ):time();
+            $vfTask["date_end"] = ( isset( $vfTask["date_end"] ) )?$this->parserDateToEpoc( $vfTask["date_end"] ):null;
+            
+            $vfTask["user_from"] = $USER->id;
+            $vfTask["updated"] = time();
+            
+            $return = array("success"=>false);
+            
+            if( $vfTask["id"] = $DB->update_record("vf_task", $vfTask) ){
+                $vfTask["date_start"] = $this->parserEpocToDate($vfTask["date_start"]);
+                $vfTask["date_end"] = ( isset( $vfTask["date_end"] ) )?$this->parserEpocToDate( $vfTask["date_end"] ):null;
+                $return["success"]=true;
+                $return["task"]=$vfTask;
+            }
+
+            header('Content-type: application/json');
+            echo json_encode(  $return );
+            exit;
+            
+        } else {
+            if( !isset($_GET["tid"]) )
+                die("Error: Seleccione una tarea para editar.");
+            else
+                $tid = $_GET["tid"];
+            
+            if (! $task = $this->_model->get_task_by_id($tid) ){
+                die("Error: No existe la tarea que intenta editar.");
+            }
+            
+            $task->date_start = $this->parserEpocToDate($task->date_start);
+            $task->date_end= ($task->date_end)?$this->parserEpocToDate($task->date_start):"";
+            
+            $this->task = $task;            
+            $this->view("edit", false);
+        }
         
     }
     

@@ -119,6 +119,25 @@ Ext.onReady(function() {
                     load_remote_content_html(url,'add-task-content');
                 }
             },{
+                icon   : 'assets/images/icons/pencil.png',  // Use a URL in the icon config
+                tooltip: 'Editar tarea',
+                handler: function(grid, rowIndex, colIndex) {
+                    var url;
+                    try{
+                        var rec = grid.getStore().getAt(rowIndex);
+                        
+                        url = 'task/edit?tid='+rec.get("id");
+                        
+                        load_remote_content_html(url,'add-task-content');
+                        
+                        
+                    }catch(e){
+                        alert("Error al tratar de seleccionar tarea.");
+                    };
+                    
+                    
+                }
+            },{
                 icon   : 'assets/images/icons/delete.png',  // Use a URL in the icon config
                 tooltip: 'Eliminar tarea',
                 handler: function(grid, rowIndex, colIndex) {
@@ -126,7 +145,7 @@ Ext.onReady(function() {
                     //alert("Sell " + rec.get('c_child'));
                     alert("Eliminar tarea");
                 }
-            },
+            }
             ]
         }
             

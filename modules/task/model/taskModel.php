@@ -28,6 +28,14 @@ class task_model extends ModelBase{
         return $tasks;
     }
     
+    function get_task_by_id($id){
+        try{
+            return $this->db->get_record("vf_task",array("id"=>$id) );
+        }  catch (Exception $e){
+            return null;
+        }
+    }
+    
     function get_tasks_by_parent($pid){
         $tasks = array();
         $sql = sprintf("SELECT p.id,p.priority,p.percent,p.name,p.description,p.courseid,p.parent,p.state,p.user_to,p.user_from,p.date_start,p.date_end,p.created,p.updated,count(c.id) as c_child
