@@ -67,13 +67,24 @@ class taskController extends ControllerBase{
             GLOBAL $DB,$USER;
             
             $vfTask = $_POST["task"];
+            
+            //Implementa validate
+            //$this->_model->validate( $vfTask );
+            
+            $vfTask["date_start"] = ( isset( $vfTask["date_start"] ) )?$this->parserDateToEpoc( $vfTask["date_start"] ):time();
+            $vfTask["date_end"] = ( isset( $vfTask["date_end"] ) )?$this->parserDateToEpoc( $vfTask["date_end"] ):null;
+
             $vfTask["courseid"] = 1;
             $vfTask["user_from"] = $USER->id;
             $vfTask["created"] = time();
             $vfTask["leaf"]=true;
             
             $return = array("success"=>false);
+            
+            
             if( $vfTask["id"] = $DB->insert_record("vf_task", $vfTask,true) ){
+                $vfTask["date_start"] = $this->parserEpocToDate($vfTask["date_start"]);
+                $vfTask["date_end"] = ( isset( $vfTask["date_end"] ) )?$this->parserEpocToDate( $vfTask["date_end"] ):null;
                 $return["success"]=true;
                 $return["task"]=$vfTask;
             }
@@ -98,6 +109,14 @@ class taskController extends ControllerBase{
         
         $this->view("update");
         
+    }
+    
+    private function parserDateToEpoc($date){
+        return strtotime($date);
+    }
+    
+    private function parserEpocToDate($date){
+        return date("d/m/Y",$date);
     }
     
 }

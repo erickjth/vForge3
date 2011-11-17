@@ -14,6 +14,15 @@
 
 .with-options{ margin-left: 0px !important; }
 .remote-content{ display: none;}
+
+/*FORM*/
+span.required{color:red;}
+
+input.error,textarea.error,select.error{ 
+    border-color: #FF9999 !important;
+}
+
+
 /*ICON*/
 .add{
     background: url('../images/icons/add.png') no-repeat 0 0;

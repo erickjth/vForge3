@@ -1,5 +1,8 @@
 $(document).ready(
     function(){
+        
+        $(".datepicker").datepicker();
+        
         $("a.remote").click(function(){
             var a = $(this);
             var content = a.attr("rel");

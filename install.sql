@@ -7,21 +7,23 @@ CREATE  TABLE IF NOT EXISTS `mdl_vf_modules` (
 )
 ENGINE = InnoDB;
 
-CREATE  TABLE IF NOT EXISTS `mdl_vf_task` (
-                  `id` INT NOT NULL AUTO_INCREMENT ,
-                  `priority` VARCHAR(45) NOT NULL ,
-                  `courseid` INT NOT NULL ,
-                  `parent` INT NULL ,
-                  `name` VARCHAR(100) NOT NULL ,
-                  `description` MEDIUMTEXT NULL ,
-                  `percent` INT NULL ,
-                  `state` VARCHAR(45) NULL ,
-                  `user_to` INT NOT NULL ,
-                  `user_from` INT NOT NULL ,
-                  `date_start` BIGINT NOT NULL ,
-                  `date_end` BIGINT NULL ,
-                  `created` BIGINT NOT NULL ,
-                  `updated` BIGINT NULL ,
-                  PRIMARY KEY (`id`) )
-                ENGINE = InnoDB;
+
+CREATE TABLE  `moodle2`.`mdl_vf_task` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `priority` varchar(45) NOT NULL,
+  `courseid` int(11) NOT NULL,
+  `parent` int(11) DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` mediumtext,
+  `percent` int(11) DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  `user_to` int(11) NOT NULL,
+  `user_from` int(11) NOT NULL,
+  `date_start` bigint(20) NOT NULL,
+  `date_end` bigint(20) DEFAULT NULL,
+  `isleaf` int(1) NOT NULL DEFAULT '1',
+  `created` bigint(20) NOT NULL,
+  `updated` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8
 
