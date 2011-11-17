@@ -87,6 +87,7 @@ class Router {
             if( is_file(MOD_PATH.DS.$this->controller.DS.'controller'.DS.$this->controller.'Controller.php') ){
                 $this->router_file = MOD_PATH.DS.$this->controller.DS.'controller'.DS.$this->controller.'Controller.php';
             }else{
+                header("HTTP/1.0 404 Not Found");
                 exit("ERROR: Controller '{$this->controller}' not found!! ");
             }
         }

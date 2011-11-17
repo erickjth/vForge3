@@ -16,14 +16,16 @@ class vfConfig {
         GLOBAL $config;
         
         $vars = array(
+            "path_modules"=>MOD_PATH,
             "path_default_layout"=>MOD_PATH.DS."layout",
             "path_base_modules"=>MOD_PATH.DS."base",
             "path_core"=>ROOT.DS."core",
             "path_base_url"=>BASE_URL,
             "path_assets"=>ROOT.DS."assets",
-            "path_assets_js"=>BASE_URL.DS."assets".DS."js",
-            "path_assets_css"=>BASE_URL.DS."assets".DS."css",
-            "path_assets_image"=>BASE_URL.DS."assets".DS."image",
+            "path_assets_js"=>BASE_URL."/assets/js",
+            "path_assets_css"=>BASE_URL."/assets/css",
+            "path_assets_image"=>BASE_URL."/assets/image",
+            "path_url_modules"=>BASE_URL."/modules",
         );
         
         if( isset ($vars[$index]) ){

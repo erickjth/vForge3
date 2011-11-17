@@ -14,9 +14,8 @@ class indexController extends ControllerBase{
     
     function index(){
         $this->set_name("base");
-        $this->load_template("index");
         $this->erick = "Hello world";
-        $this->render_template();
+        $this->view("index");
     }
 }
 

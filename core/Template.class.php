@@ -14,6 +14,7 @@ class Template {
     
     var $_vars;
     var $file_template;
+    var $with_template;
     
     function __construct($name,$module="base") {
         
@@ -32,10 +33,12 @@ class Template {
         if (!is_readable($this->file_template))
                 die("ERROR: Template '{$name}' is forbidden in '{$module}'");
        
-       extract($this->_vars);                
-       include_once vfConfig::get_config("path_default_layout").DS."header.php";
+       extract($this->_vars);   
+       
+       if( $this->with_template) include_once vfConfig::get_config("path_default_layout").DS."header.php";
        include_once $this->file_template;
-       include_once vfConfig::get_config("path_default_layout").DS."footer.php";
+       if( $this->with_template)include_once vfConfig::get_config("path_default_layout").DS."footer.php";
+       
     }
     
     

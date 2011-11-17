@@ -1,0 +1,6 @@
+Implementar eXTjs, en la vista principa
+Configurar TreeGrid
+Manejo de sesiones 
+Agregar, editar, borrar tarea.
+Implementar Tema visual
+

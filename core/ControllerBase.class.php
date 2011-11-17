@@ -16,16 +16,30 @@ abstract class ControllerBase {
     var $_ModuleName;
     var $_vars;
     var $user_session;
-    
+    var $_model; 
     
     function __construct($name) {
         GLOBAL $USER;
         $this->_ModuleName = $name;
         $this->user_session = $USER;
+        
+       //if is not installed
+       
     }
     
+    function load_model($model=null){
+        if( !$model ){
+            $model = $this->_ModuleName;
+        }
+        
+        include_once MOD_PATH.DS.$model.DS."model".DS.$model."Model.php";
+        $modelName = $model."_model";
+        $this->_model = new $modelName();
+    }
+
     protected function load_template($tname) {
-        $module;
+        
+        $module = "";
         if( isset($this->_ModuleName) ){
             $module = $this->_ModuleName;
         }else{
@@ -44,8 +58,10 @@ abstract class ControllerBase {
         $this->_template->render();
     }
     
-    function view($name){
+    function view($name,$with_template=true){
         $this->load_template($name);
+        $this->_template->with_template = $with_template;
+        
         if (count($this->_vars)) {
             foreach ($this->_vars as $k => $v) {
                 $this->_template->$k = $v;

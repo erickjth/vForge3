@@ -11,7 +11,24 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
-root { 
-    display: block;
+
+.with-options{ margin-left: 0px !important; }
+.remote-content{ display: none;}
+/*ICON*/
+.add{
+    background: url('../images/icons/add.png') no-repeat 0 0;
 }
-body{background: red;}
+a.button-without-text{
+    display: inline-block;
+    width: 16px;
+    height: 16px;  
+    float: left;
+}
+a.header-button-without-text{
+    display: inline-block;
+    width: 16px;
+    height: 16px;  
+    float: left;
+    margin: 8px 5px 8px 10px;
+}
+
